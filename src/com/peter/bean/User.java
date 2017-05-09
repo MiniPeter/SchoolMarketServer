@@ -1,16 +1,16 @@
 package com.peter.bean;
 
 public class User {
-	private String uId;
+	private String id;
 	private String username;
 	private String password;
-	private String uImgUrl;
+	private String imgUrl;
 	
-	public String getuId() {
-		return uId;
+	public String getId() {
+		return id;
 	}
-	public void setuId(String uId) {
-		this.uId = uId;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getUsername() {
 		return username;
@@ -24,10 +24,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getuImgUrl() {
-		return uImgUrl;
+	public String getImgUrl() {
+		return imgUrl;
 	}
-	public void setuImgUrl(String uImgUrl) {
-		this.uImgUrl = uImgUrl;
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 }

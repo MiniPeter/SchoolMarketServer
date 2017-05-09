@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-5-9 19:45:45 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.peter.bean.Notice" table="tb_Notice">
+        <id name="id" type="java.lang.String">
+            <column name="N_Id" length="10"/>
+            <generator class="assigned" />
+        </id>
+        <property name="authorId" type="java.lang.String">
+            <column name="N_AuthorId" length="10"/>
+        </property>
+        <property name="title" type="java.lang.String">
+            <column name="N_Title" />
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="N_content" length="500"/>
+        </property>
+        <property name="createTime" type="long">
+            <column name="N_CreateTime" />
+        </property>
+    </class>
+</hibernate-mapping>
