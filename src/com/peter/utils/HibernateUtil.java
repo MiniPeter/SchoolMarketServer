@@ -6,28 +6,38 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
-	private HibernateUtil() {
-
-	};
-
-	public static SessionFactory SessionFactory = null;
+	private static SessionFactory factory;
 
 	static {
-		// hibernate初始化
-		Configuration cf = new Configuration();
-		cf.configure();
-		SessionFactory = cf.buildSessionFactory();// DriverManager.getconnection()
-		// Session session = SessionFactory.openSession();//相当于得到Connection对象
+		try {
+			// 读取hibernate.cfg.xml文件
+			Configuration cf = new Configuration().configure();
+			// 建立SessionFactory
+			factory = cf.buildSessionFactory();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
+	
+	/*
+	 * 打开Session
+	 */
 	public static Session getSession() {
-
-		return SessionFactory.openSession();
+		return factory.openSession();
 	}
-
+	
+	/*
+	 * 关闭Session
+	 */
 	public static void closeSession(Session session) {
 		if (session != null) {
-			session.clear();
+			if (session.isOpen()) {
+				session.close();
+			}
 		}
+	}
+
+	public static SessionFactory getSessionFactory() {
+		return factory;
 	}
 }
