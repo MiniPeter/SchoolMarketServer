@@ -2,12 +2,20 @@ package com.peter.servlet;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.peter.bean.User;
+import com.peter.dao.BeanDao;
+import com.peter.dao.BeanDaoImpl;
+import com.peter.result.NetReturn;
+import com.peter.result.Result;
 
 /**
  * Servlet implementation class UserServlet
@@ -17,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
+	//get乱码String usernameString = new String(username.getBytes("ISO-8859-1"),"UTF-8");
     public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -24,21 +33,41 @@ public class LoginServlet extends HttpServlet {
 		
 	}
 
+    //post乱码：request.setCharacterEncoding("UTF-8"):
+    //response乱码：response.setContentType("application/json; charset=utf-8");  
+    //response.setCharacterEncoding("UTF-8"); 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("网络访问成功");
 		String username = request.getParameter("username");
 		username = new String(username.getBytes("iso-8859-1"), "UTF-8");
-
 		String password = request.getParameter("password");
 		password = new String(password.getBytes("iso-8859-1"), "UTF-8");
-
 		System.out.println("username=" + username + ";password=" + password);
 		
-		String json="{\"code\":100,\"msg\":\"操作成功\",\"data\":{\"id\":\"U001\",\"username\":\"admin\",\"password\":" +
-                "\"admin\",\"phone\":\"18202429136\",\"avatarUrl\":\"http://opeuvb611.bkt.clouddn.com/sort_clothes.jpeg\"}}";//"null"表示传值为String = "null";
-		//Result<User> result = new Gson().fromJson(json,  new TypeToken<Result<User>>() {}.getType());
-		  
+		BeanDao dao = new BeanDaoImpl();
+		Result<User> result = new Result<>();
+		String hql = "FROM User u WHERE u.username = '" + username + "'";
+		List<User> users = dao.findByHQL(hql);
+		if (users.isEmpty()) {
+			result.setCode(NetReturn.USER_NOT_EXIST.code());
+			result.setMsg(NetReturn.USER_NOT_EXIST.msg());
+			result.setData(null);
+		} else {
+			User user = users.get(0);
+			if (user.getPassword().equals(password)) {
+				result.setCode(NetReturn.SUCCESS.code());
+				result.setMsg(NetReturn.SUCCESS.msg());
+				result.setData(user);
+			} else {
+				result.setCode(NetReturn.USER_PASS_ERR.code());
+				result.setMsg(NetReturn.USER_PASS_ERR.msg());
+				result.setData(null);
+			}
+		}
+		String json = new Gson().toJson(result);
+		System.out.println(json);
+		
 		response.setContentType("application/json; charset=utf-8");  
         response.setCharacterEncoding("UTF-8"); 
         OutputStream out = response.getOutputStream();  

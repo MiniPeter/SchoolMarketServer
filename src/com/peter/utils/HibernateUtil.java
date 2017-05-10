@@ -11,7 +11,8 @@ public class HibernateUtil {
 	static {
 		try {
 			// 读取hibernate.cfg.xml文件
-			Configuration cf = new Configuration().configure();
+			Configuration cf = new Configuration();
+			cf.configure();
 			// 建立SessionFactory
 			factory = cf.buildSessionFactory();
 		} catch (Exception e) {

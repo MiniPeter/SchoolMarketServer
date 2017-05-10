@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.google.gson.Gson;
 import com.peter.bean.Notice;
 import com.peter.bean.Order;
 import com.peter.bean.Trade;
@@ -13,6 +14,8 @@ import com.peter.dao.BeanDao;
 import com.peter.dao.BeanDaoImpl;
 import com.peter.dao.UserDao;
 import com.peter.dao.UserDaoImpl;
+import com.peter.result.NetReturn;
+import com.peter.result.Result;
 import com.peter.utils.HibernateUtil;
 
 public class HibernateTest {
@@ -20,8 +23,37 @@ public class HibernateTest {
 	public static void main(String[] args) {
 		//test();//测试成功
 		//testUserDao();//测试成功
-		testBeanDao();
+		//testBeanDao();
+		loginTest();
 	}
+	
+	public static void loginTest() {
+		String username = "admin";
+		String password = "admin";
+		BeanDao dao = new BeanDaoImpl();
+		Result<User> result = new Result<>();
+		String hql = "FROM User u WHERE u.username = '" + username + "'";
+		List<User> users = dao.findByHQL(hql);
+		if (users.isEmpty()) {
+			result.setCode(NetReturn.USER_NOT_EXIST.code());
+			result.setMsg(NetReturn.USER_NOT_EXIST.msg());
+			result.setData(null);
+		} else {
+			User user = users.get(0);
+			if (user.getPassword().equals(password)) {
+				result.setCode(NetReturn.SUCCESS.code());
+				result.setMsg(NetReturn.SUCCESS.msg());
+				result.setData(user);
+			} else {
+				result.setCode(NetReturn.USER_PASS_ERR.code());
+				result.setMsg(NetReturn.USER_PASS_ERR.msg());
+				result.setData(null);
+			}
+		}
+		String json = new Gson().toJson(result);
+		System.out.println(json);
+	}
+	
 	public static void testBeanDao() {
 		User user = new User();
 		user.setId("U002");
