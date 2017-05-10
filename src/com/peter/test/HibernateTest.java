@@ -9,6 +9,8 @@ import com.peter.bean.Notice;
 import com.peter.bean.Order;
 import com.peter.bean.Trade;
 import com.peter.bean.User;
+import com.peter.dao.BeanDao;
+import com.peter.dao.BeanDaoImpl;
 import com.peter.dao.UserDao;
 import com.peter.dao.UserDaoImpl;
 import com.peter.utils.HibernateUtil;
@@ -18,18 +20,46 @@ public class HibernateTest {
 	public static void main(String[] args) {
 		//test();//测试成功
 		//testUserDao();//测试成功
+		testBeanDao();
+	}
+	public static void testBeanDao() {
+		User user = new User();
+		user.setId("U002");
+		System.out.println("init:" + user.toString());
+		BeanDao BeanDao = new BeanDaoImpl();
+		
+		BeanDao.save(user);
+		
+		User findUser = BeanDao.findById(User.class, user.getId());
+		System.out.println("find:" + findUser.toString());
+		
+		List<User> list = null;
+        // 1 String hql="FROM User";
+        // 2 String hql="from User where type='admin'";
+        String hql = "from User where id like '%U%'";
+        list = BeanDao.findByHQL(hql);
+        for (User u : list) {
+            System.out.println("findHQL:" + u.toString());
+        }
+        
+		user.setUsername("admin");
+		BeanDao.update(user);
+		System.out.println("update:" + BeanDao.findById(User.class, user.getId()));
+		
+		BeanDao.delete(user);
+		System.out.println("delete:" + BeanDao.findById(User.class, user.getId()));
 	}
 	
 	public static void testUserDao() {
 		User user = new User();
 		user.setId("U002");
-		System.out.println("初始化" + user.toString());
+		System.out.println("init:" + user.toString());
 		UserDao userDao = new UserDaoImpl();
 		
 		userDao.save(user);
 		
 		User findUser = userDao.findById(user.getId());
-		System.out.println("find" + findUser.toString());
+		System.out.println("find:" + findUser.toString());
 		
 		List<User> list = null;
         // 1 String hql="FROM User";
@@ -37,15 +67,15 @@ public class HibernateTest {
         String hql = "from User where id like '%U%'";
         list = userDao.findByHQL(hql);
         for (User u : list) {
-            System.out.println("findHQL" + u.toString());
+            System.out.println("findHQL:" + u.toString());
         }
         
 		user.setUsername("admin");
 		userDao.update(user);
-		System.out.println("update" + userDao.findById(user.getId()));
+		System.out.println("update:" + userDao.findById(user.getId()));
 		
 		userDao.delete(user);
-		System.out.println("delete" + userDao.findById(user.getId()));
+		System.out.println("delete:" + userDao.findById(user.getId()));
 		
 	}
 
