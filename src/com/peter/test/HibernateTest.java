@@ -21,10 +21,10 @@ import com.peter.utils.HibernateUtil;
 public class HibernateTest {
 
 	public static void main(String[] args) {
-		//test();//测试成功
+		testUtil();//测试成功
 		//testUserDao();//测试成功
 		//testBeanDao();
-		loginTest();
+		//loginTest();
 	}
 	
 	public static void loginTest() {
@@ -56,7 +56,7 @@ public class HibernateTest {
 	
 	public static void testBeanDao() {
 		User user = new User();
-		user.setId("U002");
+		user.setId(2);
 		System.out.println("init:" + user.toString());
 		BeanDao BeanDao = new BeanDaoImpl();
 		
@@ -84,7 +84,7 @@ public class HibernateTest {
 	
 	public static void testUserDao() {
 		User user = new User();
-		user.setId("U002");
+		user.setId(2);
 		System.out.println("init:" + user.toString());
 		UserDao userDao = new UserDaoImpl();
 		
@@ -114,13 +114,17 @@ public class HibernateTest {
 	public static void testUtil() {
 		// 创建用户gg
 		User user = new User();
-		user.setId("U001");
+		user.setId(1);
+		User u = new User();
+		u.setUsername("admin");
+		User u2 = new User();
+		u2.setUsername("admin");
 		Notice notice = new Notice();
-		notice.setId("N001");
+		notice.setId(1);
 		Order order = new Order();
-		order.setId("O001");
+		order.setId(1);
 		Trade trade = new Trade();
-		trade.setId("T001");
+		trade.setId(1);
 		
 		Session session = HibernateUtil.getSession();
 
@@ -130,6 +134,8 @@ public class HibernateTest {
 
 			// 对数据做保存至数据库
 			session.save(user);
+			session.save(u);
+			session.save(u2);
 			session.save(notice);
 			session.save(order);
 			session.save(trade);

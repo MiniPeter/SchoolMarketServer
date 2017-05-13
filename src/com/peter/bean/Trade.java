@@ -2,7 +2,7 @@ package com.peter.bean;
 
 public class Trade {
 
-    private String id;//商品ID T001
+    private int id;//商品ID T001
     private String title;//商品名字
     private String authorId;
     private double originalPrice;//商品原价格
@@ -13,10 +13,10 @@ public class Trade {
     private long createTime;//商品创建时间
     private int status;//商品状态。0:在售，1:售出
     
-	public String getId() {
+    public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getTitle() {

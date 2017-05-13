@@ -4,9 +4,9 @@
 <!-- Generated 2017-5-9 19:45:45 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.peter.bean.Order" table="tb_order">
-        <id name="id" type="java.lang.String">
+        <id name="id" type="int">
             <column name="O_Id" length="10"/>
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="tradeId" type="java.lang.String">
             <column name="O_TradeId" length="10"/>

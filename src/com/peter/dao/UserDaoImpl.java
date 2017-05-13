@@ -35,7 +35,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-    public User findById(String id) {
+    public User findById(int id) {
         User user = null;
         Session session = HibernateUtil.getSession();
         //使用session的get方法获取指定id的用户

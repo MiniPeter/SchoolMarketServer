@@ -2,16 +2,16 @@ package com.peter.bean;
 
 public class Notice {
 
-    private String id;//N001
+    private int id;//N001
     private String authorId;
     private String title;
     private String content;
     private long createTime;
     
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getAuthorId() {

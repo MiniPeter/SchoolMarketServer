@@ -4,9 +4,9 @@
 <!-- Generated 2017-5-9 19:45:45 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.peter.bean.Notice" table="tb_Notice">
-        <id name="id" type="java.lang.String">
+        <id name="id" type="int">
             <column name="N_Id" length="10"/>
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="authorId" type="java.lang.String">
             <column name="N_AuthorId" length="10"/>

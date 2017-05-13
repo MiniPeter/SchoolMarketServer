@@ -27,7 +27,7 @@ public class BeanDaoImpl implements BeanDao {
 	}
 
 	@Override
-	public <T> T findById(Class<T> clazz, String id) {
+	public <T> T findById(Class<T> clazz, int id) {
 		// TODO Auto-generated method stub
 		T t = null;
 		Session session = HibernateUtil.getSession();

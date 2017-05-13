@@ -11,7 +11,7 @@ public interface UserDao {
 
     public User findByIdLoad(String id);*/
 	
-	public User findById(String id);
+	public User findById(int id);
 
     public List<User>  findByHQL(String hql);
 

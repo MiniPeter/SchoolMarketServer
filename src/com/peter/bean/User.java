@@ -1,22 +1,29 @@
 package com.peter.bean;
 
 public class User {
-	private String id;
+	private int id;
 	private String username;
 	private String password;
+	private String phone;
 	private String imgUrl;
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + 
-				", password=" + password + ", imgUrl=" + imgUrl + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", phone=" + phone + ", imgUrl="
+				+ imgUrl + "]";
 	}
-	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getUsername() {
 		return username;
