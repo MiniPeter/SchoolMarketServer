@@ -4,7 +4,7 @@ public class Trade {
 
     private int id;//商品ID T001
     private String title;//商品名字
-    private String authorId;
+    private int authorId;
     private double originalPrice;//商品原价格
     private double nowPrice;//二手商品价格
     private String tagName;//商品类别
@@ -13,7 +13,14 @@ public class Trade {
     private long createTime;//商品创建时间
     private int status;//商品状态。0:在售，1:售出
     
-    public int getId() {
+    @Override
+	public String toString() {
+		return "Trade [id=" + id + ", title=" + title + ", authorId=" + authorId + ", originalPrice=" + originalPrice
+				+ ", nowPrice=" + nowPrice + ", tagName=" + tagName + ", imgUrl=" + imgUrl + ", describe=" + describe
+				+ ", createTime=" + createTime + ", status=" + status + "]";
+	}
+    
+	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
@@ -25,10 +32,10 @@ public class Trade {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getAuthorId() {
+	public int getAuthorId() {
 		return authorId;
 	}
-	public void setAuthorId(String authorId) {
+	public void setAuthorId(int authorId) {
 		this.authorId = authorId;
 	}
 	public double getOriginalPrice() {

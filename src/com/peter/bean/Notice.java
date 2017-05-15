@@ -3,21 +3,28 @@ package com.peter.bean;
 public class Notice {
 
     private int id;//N001
-    private String authorId;
+    private int authorId;
     private String title;
     private String content;
     private long createTime;
     
+    
+	@Override
+	public String toString() {
+		return "Notice [id=" + id + ", authorId=" + authorId + ", title=" + title + ", content=" + content
+				+ ", createTime=" + createTime + "]";
+	}
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getAuthorId() {
+	public int getAuthorId() {
 		return authorId;
 	}
-	public void setAuthorId(String authorId) {
+	public void setAuthorId(int authorId) {
 		this.authorId = authorId;
 	}
 	public String getTitle() {

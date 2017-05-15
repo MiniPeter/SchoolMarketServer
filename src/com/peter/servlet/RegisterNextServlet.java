@@ -17,7 +17,7 @@ import com.peter.dao.BeanDaoImpl;
 import com.peter.result.NetReturn;
 import com.peter.result.Result;
 
-@WebServlet("/RegisterNextServlet")
+@WebServlet("/RegisterNext")
 public class RegisterNextServlet extends HttpServlet {
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

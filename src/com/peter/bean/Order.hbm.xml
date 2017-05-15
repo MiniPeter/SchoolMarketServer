@@ -8,13 +8,13 @@
             <column name="O_Id" length="10"/>
             <generator class="increment" />
         </id>
-        <property name="tradeId" type="java.lang.String">
+        <property name="tradeId" type="int">
             <column name="O_TradeId" length="10"/>
         </property>
-        <property name="authorId" type="java.lang.String">
+        <property name="authorId" type="int">
             <column name="O_AuthorId" length="10"/>
         </property>
-        <property name="payId" type="java.lang.String">
+        <property name="payId" type="int">
             <column name="O_PayId" length="10"/>
         </property>
         <property name="createTime" type="long">

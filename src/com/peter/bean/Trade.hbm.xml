@@ -11,7 +11,7 @@
         <property name="title" type="java.lang.String">
             <column name="T_Title" />
         </property>
-        <property name="authorId" type="java.lang.String">
+        <property name="authorId" type="int">
             <column name="T_AuthorId" length="10"/>
         </property>
         <property name="originalPrice" type="double">

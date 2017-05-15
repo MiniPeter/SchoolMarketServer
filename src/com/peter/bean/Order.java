@@ -3,10 +3,16 @@ package com.peter.bean;
 public class Order {
 
 	private int id;
-	private String tradeId;
-	private String authorId;
-	private String payId;
+	private int tradeId;
+	private int authorId;
+	private int payId;
 	private long createTime;
+	
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", tradeId=" + tradeId + ", authorId=" + authorId + ", payId=" + payId
+				+ ", createTime=" + createTime + "]";
+	}
 	
 	public int getId() {
 		return id;
@@ -14,23 +20,22 @@ public class Order {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public String getTradeId() {
+	public int getTradeId() {
 		return tradeId;
 	}
-	public void setTradeId(String tradeId) {
+	public void setTradeId(int tradeId) {
 		this.tradeId = tradeId;
 	}
-	public String getAuthorId() {
+	public int getAuthorId() {
 		return authorId;
 	}
-	public void setAuthorId(String authorId) {
+	public void setAuthorId(int authorId) {
 		this.authorId = authorId;
 	}
-	public String getPayId() {
+	public int getPayId() {
 		return payId;
 	}
-	public void setPayId(String payId) {
+	public void setPayId(int payId) {
 		this.payId = payId;
 	}
 	public long getCreateTime() {

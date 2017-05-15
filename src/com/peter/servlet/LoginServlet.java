@@ -22,7 +22,7 @@ import com.peter.result.Result;
  * 例子：http://118.202.41.83:8080/SchoolMarketServer/LoginServlet?username=admin&password=admin
  */
 @SuppressWarnings("serial")
-@WebServlet("/LoginServlet")
+@WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
 
 	//get乱码String usernameString = new String(username.getBytes("ISO-8859-1"),"UTF-8");
@@ -39,6 +39,7 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("网络访问成功");
+		System.out.println("\n路径：" + request.getContextPath() + "/WebContent/images");
 		String username = request.getParameter("username");
 		username = new String(username.getBytes("iso-8859-1"), "UTF-8");
 		String password = request.getParameter("password");
