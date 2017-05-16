@@ -39,7 +39,6 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("网络访问成功");
-		System.out.println("\n路径：" + request.getContextPath() + "/WebContent/images");
 		String username = request.getParameter("username");
 		username = new String(username.getBytes("iso-8859-1"), "UTF-8");
 		String password = request.getParameter("password");

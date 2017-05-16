@@ -3,7 +3,6 @@ package com.peter.servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -19,13 +18,13 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.peter.bean.Trade;
-import com.peter.bean.User;
 import com.peter.dao.BeanDao;
 import com.peter.dao.BeanDaoImpl;
 import com.peter.result.NetReturn;
 import com.peter.result.Result;
 
 //图片保存路径D:\\Programs\\workspaceJava\\SchoolMarketServer\\WebContent\\images\\
+//D:\\Programs\\workspaceJava\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\SchoolMarketServer\\upload
 @WebServlet("/AddTrade")
 public class AddTradeServlet extends HttpServlet {
 	
@@ -42,8 +41,8 @@ public class AddTradeServlet extends HttpServlet {
 		// 创建文件项目工厂对象
 		DiskFileItemFactory factory = new DiskFileItemFactory(); 
 		// 设置文件上传路径
-		//File uploadDir = new File(this.getServletContext().getRealPath("/upload/"));// 设置文件上传的路径为项目名/upload/
-		File uploadDir = new File("D:\\Programs\\workspaceJava\\SchoolMarketServer\\WebContent\\images\\");
+		File uploadDir = new File(this.getServletContext().getRealPath("/images/"));// 设置文件上传的路径为项目名/upload/
+		//File uploadDir = new File("D:\\Programs\\workspaceJava\\SchoolMarketServer\\WebContent\\images\\");
 		System.out.println("文件上传的路径=" + uploadDir);
 		if (!uploadDir.exists()) {// 如果改文件夹不存在就创建
 			uploadDir.mkdirs();
