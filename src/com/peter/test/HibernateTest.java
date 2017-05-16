@@ -1,5 +1,6 @@
 package com.peter.test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -21,11 +22,22 @@ import com.peter.utils.HibernateUtil;
 public class HibernateTest {
 
 	public static void main(String[] args) {
-		testUtil();//测试成功
+		//testUtil();//测试成功
 		//testUserDao();//测试成功
 		//testBeanDao();
 		//loginTest();
+		drawerTest();
 	}
+	
+	public static void drawerTest() {
+		String hql = "FROM Trade t WHERE t.status = 0 "
+				+ "AND (t.payId = 1 OR (t.authorId = 1 AND t.payId != 0))";//待确认
+		BeanDao dao = new BeanDaoImpl();
+		List<Trade> trades = dao.findByHQL(hql);
+		String json = new Gson().toJson(trades);
+		System.out.println(json);
+	}
+	
 	
 	public static void loginTest() {
 		String username = "admin";

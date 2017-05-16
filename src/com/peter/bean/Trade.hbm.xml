@@ -14,6 +14,9 @@
         <property name="authorId" type="int">
             <column name="T_AuthorId" length="10"/>
         </property>
+        <property name="payId" type="int">
+            <column name="T_PayId" length="10"/>
+        </property>
         <property name="originalPrice" type="double">
             <column name="T_OriginalPrice" />
         </property>

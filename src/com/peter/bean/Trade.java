@@ -5,6 +5,7 @@ public class Trade {
     private int id;//商品ID T001
     private String title;//商品名字
     private int authorId;
+    private int payId;
     private double originalPrice;//商品原价格
     private double nowPrice;//二手商品价格
     private String tagName;//商品类别
@@ -20,6 +21,16 @@ public class Trade {
 				+ ", createTime=" + createTime + ", status=" + status + "]";
 	}
     
+    
+	public int getPayId() {
+		return payId;
+	}
+
+
+	public void setPayId(int payId) {
+		this.payId = payId;
+	}
+
 	public int getId() {
 		return id;
 	}
