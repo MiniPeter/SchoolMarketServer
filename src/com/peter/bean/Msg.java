@@ -2,6 +2,7 @@ package com.peter.bean;
 
 public class Msg {
 	private int id;
+	private int tradeId;
 	private int authorId;
     private String title;
     private String content;
@@ -12,6 +13,13 @@ public class Msg {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public int getTradeId() {
+		return tradeId;
+	}
+	public void setTradeId(int tradeId) {
+		this.tradeId = tradeId;
 	}
 	public int getAuthorId() {
 		return authorId;

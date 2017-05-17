@@ -8,6 +8,9 @@
             <column name="M_Id" length="10" />
             <generator class="increment" />
         </id>
+        <property name="tradeId" type="int">
+            <column name="M_TradeId" length="10" />
+        </property>
         <property name="authorId" type="int">
             <column name="M_AuthorId" length="10" />
         </property>
