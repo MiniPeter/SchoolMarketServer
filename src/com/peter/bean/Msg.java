@@ -2,20 +2,22 @@ package com.peter.bean;
 
 public class Msg {
 	private int id;
+	private int authorId;
     private String title;
     private String content;
     private long createTime;
     
-	@Override
-	public String toString() {
-		return "Msg [id=" + id + ", title=" + title + ", content=" + content + ", createTime=" + createTime + "]";
-	}
-	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getAuthorId() {
+		return authorId;
+	}
+	public void setAuthorId(int authorId) {
+		this.authorId = authorId;
 	}
 	public String getTitle() {
 		return title;
@@ -35,6 +37,9 @@ public class Msg {
 	public void setCreateTime(long createTime) {
 		this.createTime = createTime;
 	}
-    
-    
+	@Override
+	public String toString() {
+		return "Msg [id=" + id + ", authorId=" + authorId + ", title=" + title + ", content=" + content
+				+ ", createTime=" + createTime + "]";
+	}
 }

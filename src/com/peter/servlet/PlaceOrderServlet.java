@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.peter.bean.Msg;
 import com.peter.bean.Order;
 import com.peter.bean.Trade;
 import com.peter.dao.BeanDao;
@@ -42,6 +43,21 @@ public class PlaceOrderServlet extends HttpServlet {
 			order.setTradeId(tradeId);
 			order.setPayId(userId);
 			dao.save(order);
+			
+			Msg msgBuy = new Msg();
+			msgBuy.setAuthorId(userId);
+			msgBuy.setTitle("下单消息");
+			msgBuy.setContent("恭喜您成功下单，订单商品为：\"" + trade.getTitle() + "\"");
+			msgBuy.setCreateTime(System.currentTimeMillis());
+            dao.save(msgBuy);
+            
+            Msg msgSold = new Msg();
+            msgSold.setAuthorId(trade.getAuthorId());
+            msgSold.setTitle("订单消息");
+			msgSold.setContent("恭喜您的商品：\"" + trade.getTitle() 
+				+ "\"" + "被下单。");
+			msgSold.setCreateTime(System.currentTimeMillis());
+			dao.save(msgSold);
 		}
 		
 		Result<String> result = new Result<>();

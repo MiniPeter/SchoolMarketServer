@@ -34,6 +34,26 @@ public class GetMsgsServlet extends HttpServlet {
 		System.out.println("" + userId);
 		
 		BeanDao dao = new BeanDaoImpl();
+		String hql = "FROM Msg m WHERE m.authorId = " + userId + "";
+		List<Msg> msgs = dao.findByHQL(hql);
+		Result<List<Msg>> result = new Result<>();
+		result.setCode(NetReturn.SUCCESS.code());
+		result.setMsg(NetReturn.SUCCESS.msg());
+		if (!msgs.isEmpty()) {
+			result.setData(msgs);
+		} else {
+			result.setData(null);
+		}
+		
+		String json = new Gson().toJson(result);
+		System.out.println(json);
+		
+		response.setContentType("application/json; charset=utf-8");  
+        response.setCharacterEncoding("UTF-8"); 
+        OutputStream out = response.getOutputStream();  
+        out.write(json.getBytes("UTF-8"));  
+        out.flush();
+		/*BeanDao dao = new BeanDaoImpl();
 		String hql = "FROM Order o WHERE o.authorId = " + userId + "";
 		List<Order> orders = dao.findByHQL(hql);
 		List<Msg> msgs = new ArrayList<>();
@@ -45,23 +65,17 @@ public class GetMsgsServlet extends HttpServlet {
 				dao.delete(order);
 				Trade trade = dao.findById(Trade.class, order.getTradeId());
 				Msg msg = new Msg();
+				msg.setAuthorId(userId);
 				msg.setCreateTime(order.getCreateTime());
 				msg.setTitle("订单消息");
 				msg.setContent("恭喜您的商品：\"" + trade.getTitle() 
 					+ "\"" + "被下单。");
+				dao.save(msg);
 				msgs.add(msg);
 			}
 			result.setData(msgs);
 		} else {
 			result.setData(null);
-		}
-		String json = new Gson().toJson(result);
-		System.out.println(json);
-		
-		response.setContentType("application/json; charset=utf-8");  
-        response.setCharacterEncoding("UTF-8"); 
-        OutputStream out = response.getOutputStream();  
-        out.write(json.getBytes("UTF-8"));  
-        out.flush(); 
+		}*/ 
 	}
 }

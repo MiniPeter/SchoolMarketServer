@@ -28,5 +28,6 @@
         <mapping resource="com/peter/bean/Notice.hbm.xml"/> 
         <mapping resource="com/peter/bean/Trade.hbm.xml"/> 
         <mapping resource="com/peter/bean/Order.hbm.xml"/> 
+        <mapping resource="com/peter/bean/Msg.hbm.xml"/> 
     </session-factory>
 </hibernate-configuration>

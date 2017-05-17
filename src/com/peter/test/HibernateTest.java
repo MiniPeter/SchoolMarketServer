@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.google.gson.Gson;
+import com.peter.bean.Msg;
 import com.peter.bean.Notice;
 import com.peter.bean.Order;
 import com.peter.bean.Trade;
@@ -26,7 +27,26 @@ public class HibernateTest {
 		//testUserDao();//测试成功
 		//testBeanDao();
 		//loginTest();
-		drawerTest();
+		//drawerTest();
+		testMsg();
+	}
+	
+	public static void testMsg() {
+		// 创建用户gg
+		Msg msg = new Msg();
+		msg.setAuthorId(3);
+		Session session = HibernateUtil.getSession();
+		Transaction Transaction = session.beginTransaction();
+		try {
+			session.save(msg);
+			// 提交事务
+			Transaction.commit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			// 如果出现异常则进行事务回滚
+			Transaction.rollback();
+		}
 	}
 	
 	public static void drawerTest() {
