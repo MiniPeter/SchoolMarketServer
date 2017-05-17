@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-5-17 12:59:28 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.peter.bean.Msg" table="tb_Msg">
+        <id name="id" type="int">
+            <column name="M_Id" length="10" />
+            <generator class="increment" />
+        </id>
+        <property name="title" type="java.lang.String">
+            <column name="M_Title" />
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="M_Content" />
+        </property>
+        <property name="createTime" type="long">
+            <column name="M_CreateTime" />
+        </property>
+    </class>
+</hibernate-mapping>
