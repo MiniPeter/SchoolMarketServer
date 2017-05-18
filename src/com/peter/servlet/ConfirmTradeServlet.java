@@ -46,6 +46,14 @@ public class ConfirmTradeServlet extends HttpServlet {
 					trade.setStatus(1);
 					dao.update(trade);
 				}
+				
+				hql = "FROM Msg m WHERE m.tradeId = " + tradeId + " AND "
+						+ "m.authorId = " + userId + "";
+				List<Msg> msgs = dao.findByHQL(hql);
+				if (!msgs.isEmpty()) {
+					dao.delete(msgs.get(0));
+				}
+				
 			} else {
 				order.setPayId(0);
 				dao.update(order);
@@ -54,6 +62,11 @@ public class ConfirmTradeServlet extends HttpServlet {
 				List<Msg> msgs = dao.findByHQL(hql);
 				if (!msgs.isEmpty()) {
 					dao.delete(msgs.get(0));
+				}
+				Trade trade = dao.findById(Trade.class, tradeId);
+				if (trade != null) {
+					trade.setStatus(2);
+					dao.update(trade);
 				}
 			}
 			

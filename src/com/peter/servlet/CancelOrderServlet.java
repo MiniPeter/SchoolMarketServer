@@ -52,6 +52,7 @@ public class CancelOrderServlet extends HttpServlet {
 					if (trade.getPayId() != 0) {
 						//取消订单操作
 						trade.setPayId(0);
+						trade.setStatus(0);
 						dao.update(trade);
 					
 						dao.delete(order);

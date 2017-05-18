@@ -35,37 +35,43 @@ public class PlaceOrderServlet extends HttpServlet {
 		BeanDao dao = new BeanDaoImpl();
 		Trade trade = dao.findById(Trade.class, tradeId);
 		Order order = new Order();
-		if (trade != null) {
-			trade.setPayId(userId);
-			dao.update(trade);
-			order.setAuthorId(trade.getAuthorId());
-			order.setCreateTime(System.currentTimeMillis());
-			order.setTradeId(tradeId);
-			order.setPayId(userId);
-			dao.save(order);
-			
-			Msg msgBuy = new Msg();
-			msgBuy.setTradeId(tradeId);
-			msgBuy.setAuthorId(userId);
-			msgBuy.setTitle("下单消息");
-			msgBuy.setContent("恭喜您成功下单，订单商品为：\"" + trade.getTitle() + "\"");
-			msgBuy.setCreateTime(System.currentTimeMillis());
-            dao.save(msgBuy);
-            
-            Msg msgSold = new Msg();
-            msgSold.setTradeId(tradeId);
-            msgSold.setAuthorId(trade.getAuthorId());
-            msgSold.setTitle("订单消息");
-			msgSold.setContent("恭喜您的商品：\"" + trade.getTitle() 
-				+ "\"" + "被下单。");
-			msgSold.setCreateTime(System.currentTimeMillis());
-			dao.save(msgSold);
-		}
-		
 		Result<String> result = new Result<>();
 		result.setCode(NetReturn.SUCCESS.code());
 		result.setMsg(NetReturn.SUCCESS.msg());
-		result.setData(null);
+		if (trade != null) {
+			if (trade.getStatus() != 0) {
+				result.setData("您手慢了，此商品已被下单！");
+			} else {
+				trade.setPayId(userId);
+				trade.setStatus(4);
+				dao.update(trade);
+				order.setAuthorId(trade.getAuthorId());
+				order.setCreateTime(System.currentTimeMillis());
+				order.setTradeId(tradeId);
+				order.setPayId(userId);
+				dao.save(order);
+				
+				Msg msgBuy = new Msg();
+				msgBuy.setTradeId(tradeId);
+				msgBuy.setAuthorId(userId);
+				msgBuy.setTitle("下单消息");
+				msgBuy.setContent("恭喜您成功下单，订单商品为：\"" + trade.getTitle() + "\"");
+				msgBuy.setCreateTime(System.currentTimeMillis());
+	            dao.save(msgBuy);
+	            
+	            Msg msgSold = new Msg();
+	            msgSold.setTradeId(tradeId);
+	            msgSold.setAuthorId(trade.getAuthorId());
+	            msgSold.setTitle("订单消息");
+				msgSold.setContent("恭喜您的商品：\"" + trade.getTitle() 
+					+ "\"" + "被下单。");
+				msgSold.setCreateTime(System.currentTimeMillis());
+				dao.save(msgSold);
+				
+				result.setData("下单成功！");
+			}
+		}
+		
 		String json = new Gson().toJson(result);
 		System.out.println(json);
 		

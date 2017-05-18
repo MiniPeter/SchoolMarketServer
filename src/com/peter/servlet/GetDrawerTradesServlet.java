@@ -36,12 +36,12 @@ public class GetDrawerTradesServlet extends HttpServlet {
 		
         String hql = "";
 		switch (typeId) {
-			case 0 : hql = "FROM Trade t WHERE t.status = 0 "
+			case 0 : hql = "FROM Trade t WHERE t.status != 1 "
 					+ "AND (t.payId = " + myId + " OR (t.authorId = " + myId + " AND t.payId != 0))";//待确认
 				break;
 			case 1 : hql = "FROM Trade t WHERE t.status = 1 AND t.payId = " + myId + "";//已买
 				break;
-			case 2 : hql = "FROM Trade t WHERE t.status = 0 AND t.authorId = " + myId + "";//正在卖
+			case 2 : hql = "FROM Trade t WHERE t.status != 1 AND t.authorId = " + myId + "";//正在卖
 				break;
 			case 3 : hql = "FROM Trade t WHERE t.status = 1 AND t.authorId = " + myId + "";//已卖
 				break;
